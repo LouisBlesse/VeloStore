@@ -9,6 +9,10 @@
       <router-link v-show="!this.$store.state.connexion" to="/signupview"
         >Signup</router-link
       >
+
+      <router-link v-show="this.$store.state.connexion" to="/updateview"
+        >Updateview</router-link
+      >
       <router-link @click="logout" v-show="this.$store.state.connexion" to="/"
         >Logout</router-link
       >
@@ -24,8 +28,8 @@ export default {
     async logout() {
       const auth = getAuth();
 
-      this.$store.state.connexion = false;
       await signOut(auth);
+      this.$store.state.connexion = false;
     },
   },
 };

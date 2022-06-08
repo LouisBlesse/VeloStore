@@ -24,6 +24,7 @@
               type="password"
               id="password"
               v-model="newUser.password"
+              autocomplete="on"
               required
             />
           </div>
@@ -44,11 +45,9 @@
 </template>
 
 <script>
-import { auth } from "../firebase/config";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { app } from "../firebase/config";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
 export default {
   components: {},
@@ -65,13 +64,31 @@ export default {
     };
   },
   methods: {
+    writeUserData(userId, name, email, password) {
+      const db = getDatabase();
+      set(ref(db, "users/" + userId), {
+        username: name,
+        email: email,
+        password: password,
+      });
+    },
+
     register() {
+      const auth = getAuth(app);
+
       createUserWithEmailAndPassword(
         auth,
         this.newUser.email,
         this.newUser.password
       ).then((data) => {
         console.log("succefully sign in");
+        const user = data.user.uid;
+        this.writeUserData(
+          user,
+          this.newUser.username,
+          this.newUser.email,
+          this.newUser.password
+        );
       });
     },
   },

@@ -51,12 +51,13 @@ export default {
     async login() {
       try {
         const auth = getAuth();
-
         await signInWithEmailAndPassword(
           auth,
           this.user.username,
           this.user.password
         );
+        this.$store.state.connexion = true;
+        this.$router.push("/updateview");
       } catch (error) {
         switch (error.code) {
           case "auth/user-not-found":
@@ -69,8 +70,6 @@ export default {
             alert("Something went wrong");
         }
       }
-      this.$store.state.connexion = true;
-      this.$router.push("/updateview");
     },
   },
 };

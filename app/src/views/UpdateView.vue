@@ -13,6 +13,14 @@
           name="email"
           required
         />
+        <label><b>Password</b></label>
+        <input
+          type="password"
+          v-model="user.password"
+          placeholder="Entrer le password"
+          name="password"
+          required
+        />
 
         <div>
           <p id="errorLogInMessage"></p>
@@ -26,7 +34,7 @@
 
 <script>
 // import { auth } from "../firebase/config";
-import { getAuth, updateEmail } from "firebase/auth";
+import { getAuth, updateEmail, updatePassword } from "firebase/auth";
 
 export default {
   name: "UpdateView",
@@ -42,9 +50,20 @@ export default {
   methods: {
     async update() {
       const auth = getAuth();
-      updateEmail(auth.currentUser, this.user.email).then(() => {
-        console.log("good ");
-      });
+      if (this.email !== "") {
+        updateEmail(auth.currentUser, this.user.email).then(() => {
+          console.log("good ");
+        });
+      }
+      if (this.password !== "") {
+        const user = auth.currentUser;
+        console.log(user);
+        const newPassword = this.user.password;
+
+        updatePassword(user, newPassword).then((data) => {
+          console.log(data);
+        });
+      }
     },
   },
 };

@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <Header />
     <img alt="Vue logo" src="../assets/logo.png" />
   </div>
 </template>
@@ -13,3 +12,5 @@ export default {
   components: { Header },
 };
 </script>
+
+<style lang="scss" scoped></style>

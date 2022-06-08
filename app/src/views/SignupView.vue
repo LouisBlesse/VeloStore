@@ -1,13 +1,12 @@
 <template>
   <div>
-    <navbar :connected="connected" @log-out="logOut"></navbar>
     <section>
       <div id="container">
-        <form @submit.prevent="addUser">
+        <form @submit.prevent="register">
           <h1>Inscription</h1>
 
           <div>
-            <label for="pseudo">Pseudo* :</label>
+            <label for="pseudo">Pseudo* :</label>
             <input
               type="text"
               id="username"
@@ -16,7 +15,7 @@
             />
           </div>
           <div>
-            <label for="email">E-mail* :</label>
+            <label for="email">E-mail* :</label>
             <input type="email" id="email" v-model="newUser.email" required />
           </div>
           <div>
@@ -28,10 +27,10 @@
               required
             />
           </div>
-          <div>
+          <!-- <div>
             <label for="name">Confirmation mot de passe* :</label>
             <input type="password" id="confirmationPassword" required />
-          </div>
+          </div> -->
 
           <div>
             <p id="errorSignUpMessage"></p>
@@ -45,13 +44,16 @@
 </template>
 
 <script>
-const Navbar = window.httpVueLoader("./components/Navbar.vue");
-module.exports = {
-  components: {
-    Navbar,
-  },
+import { auth } from "../firebase/config";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+export default {
+  components: {},
   props: {
-    connected: { type: Boolean },
+    connected: {},
   },
   data() {
     return {
@@ -63,20 +65,14 @@ module.exports = {
     };
   },
   methods: {
-    addUser() {
-      if (
-        document.getElementById("password").value ==
-        document.getElementById("confirmationPassword").value
-      ) {
-        this.$emit("add-user", this.newUser);
-        this.connected = true;
-      } else {
-        document.getElementById("errorSignUpMessage").innerHTML =
-          "Mot de passe non identique.";
-      }
-    },
-    logOut() {
-      this.$emit("log-out");
+    register() {
+      createUserWithEmailAndPassword(
+        auth,
+        this.newUser.email,
+        this.newUser.password
+      ).then((data) => {
+        console.log("succefully sign in");
+      });
     },
   },
 };
@@ -85,8 +81,7 @@ module.exports = {
 <style scoped>
 section {
   background: linear-gradient(#071e38, #040614);
-  height: calc(100vh - 305px);
-  min-height: 550px;
+  height: calc(100vh - 6vh);
   display: flex;
   align-items: center;
   font-family: "Montserrat", sans-serif;

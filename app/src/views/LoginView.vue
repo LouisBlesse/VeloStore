@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <navbar  :connected="connected" @log-out="logOut"></navbar>
+  <div class="login">
     <section>
       <div id="container">
         <!-- zone de connexion -->
 
-        <form @submit.prevent="logIn">
+        <form @submit.prevent="login">
           <h1>Connexion</h1>
 
           <label><b>Nom d'utilisateur ou E-mail</b></label>
@@ -16,7 +15,6 @@
             name="username"
             required
           />
-
           <label><b>Mot de passe</b></label>
           <input
             type="password"
@@ -38,14 +36,9 @@
 </template>
 
 <script>
-const Navbar = window.httpVueLoader("./components/Navbar.vue");
-module.exports = {
-  components: {
-    Navbar,
-  },
-  props: {
-    connected: { type: Boolean }
-  },
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+export default {
   data() {
     return {
       user: {
@@ -55,24 +48,42 @@ module.exports = {
     };
   },
   methods: {
-    logIn() {
-      this.$emit("log-in", this.user);
+    async login() {
+      try {
+        const auth = getAuth();
+
+        await signInWithEmailAndPassword(
+          auth,
+          this.user.username,
+          this.user.password
+        );
+      } catch (error) {
+        switch (error.code) {
+          case "auth/user-not-found":
+            alert("User not found");
+            break;
+          case "auth/wrong-password":
+            alert("Wrong password");
+            break;
+          default:
+            alert("Something went wrong");
+        }
+      }
+      this.$store.state.connexion = true;
+      this.$router.push("/updateview");
     },
-    logOut () {
-      this.$emit('log-out')
-    }
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 section {
   background: linear-gradient(#071e38, #040614);
-  height: calc(100vh - 305px);
-  min-height: 500px;
+  height: calc(100vh - 6vh);
   display: flex;
   align-items: center;
   font-family: "Montserrat", sans-serif;
+  //   height: 100vh;
 }
 #container {
   width: 400px;

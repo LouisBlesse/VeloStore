@@ -1,113 +1,41 @@
 <template>
   <div>
-    <navbar :connected="connected" @log-out="logOut"></navbar>
     <section>
       <h2 id="mespokémons">Mes Pokémons</h2>
-      <article v-for="pokemon in team.pokemons" :key="pokemon.teamid">
-        <div
-          class="pokemon-content"
-          v-if="editingNickname.id !== pokemon.teamid"
-        >
-          <div class="pokemon-title">
-            <h2>No.{{ pokemon.no }} {{ pokemon.name }}</h2>
-          </div>
+      <form @submit.prevent="updateProfil">
+        <h1>Connexion</h1>
 
-          <router-link class="pokemon-essential" :to="'/pokemon/' + pokemon.id">
-            <div class="pokemon-nickname">
-              <h2 v-if="pokemon.nickname !== null && pokemon.nickname !== ''">
-                {{ pokemon.nickname }}
-              </h2>
-              <h2 v-else>{{pokemon.name }}</h2>
-            </div>
-            <div
-              class="pokemon-img"
-              v-if="
-                pokemon.image != null &&
-                pokemon.image != 'null' &&
-                pokemon.image != ''
-              "
-              :style="{ backgroundImage: 'url(' + pokemon.image + ')' }"
-            ></div>
-            <div
-              class="pokemon-img"
-              v-else
-              :style="{ backgroundImage: 'url(../img/unknownPokemon.png)' }"
-            ></div>
-          </router-link>
+        <label><b>Nom d'utilisateur ou E-mail</b></label>
+        <input
+          type="text"
+          v-model="user.username"
+          placeholder="Entrer le nom d'utilisateur"
+          name="username"
+          required
+        />
+        <label><b>Mot de passe</b></label>
+        <input
+          type="password"
+          v-model="user.password"
+          placeholder="Entrer le mot de passe"
+          name="password"
+          required
+        />
+        <label><b>Email</b></label>
+        <input
+          type="email"
+          v-model="user.email"
+          placeholder="Entrer l'email"
+          name="email"
+          required
+        />
 
-          <div class="pokemon-button">
-            <button @click="editNickname(pokemon)">Modifier le surnom</button>
-          </div>
-
-          <div class="pokemon-type">
-            <h3 id="type">Type:</h3>
-            <div class="pokemon-type-img">
-              <div
-                class="type"
-                :style="{
-                  backgroundImage:
-                    'url(\'../img/type/' + pokemon.type1 + '.png\')',
-                }"
-              ></div>
-              <div
-                class="type"
-                v-if="pokemon.type2 !== null"
-                :style="{
-                  backgroundImage:
-                    'url(\'../img/type/' + pokemon.type2 + '.png\')',
-                }"
-              ></div>
-            </div>
-          </div>
-          <div class="pokemon-button">
-            <button @click="removeFromPc(pokemon.teamid)">Retirer du PC</button>
-          </div>
+        <div>
+          <p id="errorLogInMessage"></p>
         </div>
-        <div class="pokemon-content" v-else>
-          <div class="pokemon-essential">
-            <div class="pokemon-nickname">
-              <input type="text" v-model="editingNickname.nickname" />
-            </div>
-            <div
-              class="pokemon-img"
-              v-if="
-                pokemon.image != null &&
-                pokemon.image != 'null' &&
-                pokemon.image != ''
-              "
-              :style="{ backgroundImage: 'url(' + pokemon.image + ')' }"
-            ></div>
-            <div
-              class="pokemon-img"
-              v-else
-              :style="{ backgroundImage: 'url(../img/unknownPokemon.png)' }"
-            ></div>
-          </div>
-          <div class="pokemon-button">
-            <button @click="sendEditNickname()">Valider</button>
-            <button @click="abortEditNickname()">Annuler</button>
-          </div>
-          <h3>Type :</h3>
 
-          <div class="pokemon-type">
-            <div
-              class="type"
-              :style="{
-                backgroundImage:
-                  'url(\'../img/type/' + pokemon.type1 + '.png\')',
-              }"
-            ></div>
-            <div
-              class="type"
-              v-if="pokemon.type2 !== null"
-              :style="{
-                backgroundImage:
-                  'url(\'../img/type/' + pokemon.type2 + '.png\')',
-              }"
-            ></div>
-          </div>
-        </div>
-      </article>
+        <input type="submit" id="submit" value="Connexion" />
+      </form>
     </section>
   </div>
 </template>
@@ -156,16 +84,14 @@ module.exports = {
 </script>
 
 <style scoped>
-
-  
-  section article {
+section article {
   color: rgba(2, 1, 0, 0.726);
   margin: 0 10%;
   background-color: #eeeeee;
   border-radius: 40px;
 }
 
-  #mespokémons {
+#mespokémons {
   color: black;
   font-family: "Montserrat", sans-serif;
   font-size: 35px;
@@ -174,8 +100,8 @@ module.exports = {
   position: relative;
   left: 3em;
 }
-  
-  button  {
+
+button {
   border-color: black;
   background-color: gold;
   font-weight: 600;
@@ -183,58 +109,57 @@ module.exports = {
   border-radius: 10px;
 }
 
-  div#first {
+div#first {
   background-color: rgb(187, 170, 170);
 }
 
-  div#first div {
+div#first div {
   display: inline-block;
   width: 48%;
 }
 
-  div#first div.gauche {
+div#first div.gauche {
   background-color: rgb(185, 178, 178);
 }
 
-  div#first div.droite {
+div#first div.droite {
   vertical-align: top;
 }
 
-  div#first div h6,
+div#first div h6,
 h3,
 input {
   margin-left: 35px;
   margin-bottom: 10px;
 }
 
-  .pokemon-content {
+.pokemon-content {
   display: flex;
-  
 }
 
-  section .pokemon-img {
+section .pokemon-img {
   width: 80px;
   height: 80px;
   background-size: cover;
 }
 
-  section .type {
+section .type {
   height: 15px;
   width: 70px;
 }
 
-  section .pokemon-type {
+section .pokemon-type {
   display: flex;
   align-items: center;
   margin: 0 20px;
 }
 
-  section .pokemon-type-img {
+section .pokemon-type-img {
   display: flex;
   width: 140px;
 }
 
-  section .pokemon-button  {
+section .pokemon-button {
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -242,13 +167,11 @@ input {
   border: 10px;
 }
 
-  article h2 {
+article h2 {
   font-size: 20px;
 }
 
-  article h3 {
+article h3 {
   font-size: 18px;
-
 }
-
 </style>

@@ -66,10 +66,8 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       margin: 1rem;
-      border-bottom: 1px solid #fff;
-      padding-bottom: 0.7rem;
       width: 200px;
-      background-color: rgb(255, 255, 255);
+      background-color: rgb(119, 184, 219);
       color: #071e38;
       border-radius: 5px;
       position: relative;
@@ -83,7 +81,7 @@ export default {
         position: absolute;
         top: 0;
         right: 0;
-        padding: 0.4rem;
+        padding: 1rem;
       }
 
       span {
@@ -92,9 +90,9 @@ export default {
       }
 
       img {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto;
+        width: 90%;
+        height: 150px;
+        margin: 0.3rem auto;
       }
 
       button {

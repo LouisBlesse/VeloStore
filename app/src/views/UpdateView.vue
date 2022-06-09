@@ -20,6 +20,14 @@
           name="password"
           required
         />
+        <label><b>Pseudo</b></label>
+        <input
+          type="text"
+          v-model="user.username"
+          placeholder="Entrer le pseudo"
+          name="username"
+          required
+        />
 
         <div>
           <p id="errorLogInMessage"></p>
@@ -84,14 +92,35 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  // align-items: start;
   width: 500px;
-
   padding: 30px;
   border: 1px solid #f1f1f1;
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 2px;
+
+  h1 {
+    text-align: center;
+  }
+
+  /* Full-width inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+
+  label {
+    color: black;
+    margin: 0.3rem;
+  }
 }
 
 form div + div {
@@ -114,14 +143,6 @@ input[type="submit"]:hover {
   background-color: white;
   color: #e59c3a;
   border: 1px solid #e59c3a;
-}
-
-label {
-  /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
-  display: inline-block;
-  color: black;
-  width: 125px;
-  text-align: right;
 }
 
 input,

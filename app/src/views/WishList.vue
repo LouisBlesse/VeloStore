@@ -1,7 +1,8 @@
 <template>
-  <div class="home">
+  <div class="wishlist">
+    <h2>Wish List</h2>
     <ul>
-      <li v-for="(product, index) in this.$store.state.products" :key="index">
+      <li v-for="(product, index) in this.$store.state.wishlist" :key="index">
         <div class="left">
           <img :src="product.image" :alt="product.name" />
           <div class="body">
@@ -10,36 +11,50 @@
           </div>
         </div>
         <span> {{ product.price }} </span>
-        <font-awesome-icon @click="addToWishList(product)" icon="heart" />
-        <font-awesome-icon @click="addToCart(product)" icon="cart-plus" />
+        <font-awesome-icon class="cart-icon" icon="cart-plus" />
+        <font-awesome-icon
+          @click="deleteItemOfWishList(product.id)"
+          class="close-icon"
+          icon="circle-xmark"
+        />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Header from "../components/Header.vue";
-
 export default {
-  name: "HomeView",
-  components: { Header },
+  name: "WishList",
+  data() {
+    return {};
+  },
   methods: {
-    addToWishList(element) {
-      this.$store.commit("addToWishList", element);
-    },
-    addToCart(element) {
-      this.$store.commit("addToCart", element);
+    deleteItemOfWishList(index) {
+      console.log(index);
+      let elementToDelete = this.$store.state.wishlist.findIndex(
+        (x) => x.id === index
+      );
+      this.$store.state.wishlist.splice(elementToDelete, 1);
+      index = undefined;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.home {
+.wishlist {
   background: linear-gradient(#071e38, #040614);
   height: calc(100vh - 7vh);
-  width: 100vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   color: #fff;
+
+  align-items: center;
+  h2 {
+    text-align: center;
+    margin: 2rem;
+  }
   ul {
     justify-content: center;
     display: flex;

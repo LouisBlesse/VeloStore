@@ -50,11 +50,13 @@ export default {
   methods: {
     async update() {
       const auth = getAuth();
+
       if (this.email !== "") {
         updateEmail(auth.currentUser, this.user.email).then(() => {
           console.log("good ");
         });
       }
+
       if (this.password !== "") {
         const user = auth.currentUser;
         console.log(user);

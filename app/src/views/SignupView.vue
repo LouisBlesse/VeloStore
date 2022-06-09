@@ -28,10 +28,6 @@
               required
             />
           </div>
-          <!-- <div>
-            <label for="name">Confirmation mot de passe* :</label>
-            <input type="password" id="confirmationPassword" required />
-          </div> -->
 
           <div>
             <p id="errorSignUpMessage"></p>

@@ -13,6 +13,12 @@
       <router-link v-show="this.$store.state.connexion" to="/updateview"
         >Updateview</router-link
       >
+      <router-link v-show="this.$store.state.connexion" to="/wishlist"
+        >Wish List</router-link
+      >
+      <router-link v-show="this.$store.state.connexion" to="/cartview"
+        >Cart View</router-link
+      >
       <router-link @click="logout" v-show="this.$store.state.connexion" to="/"
         >Logout</router-link
       >

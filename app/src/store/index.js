@@ -34,6 +34,226 @@ export default createStore({
           "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
         author: "aymeric maillot",
       },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
+      {
+        id: 2,
+        name: "vélo1",
+        image:
+          "https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg",
+        price: 35,
+        description:
+          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. A nesciuntcumque impedit veniam repellendus sint suscipit soluta. Repellendus rem, iste molestias sint sunt ipsam fuga iusto, dolor ratione maxime harum?",
+        author: "aymeric maillot",
+      },
     ],
     wishlist: [],
     cart: [],

@@ -1,9 +1,8 @@
 <template>
   <div class="update">
     <section>
-      <h2 id="mespokémons">Mes Pokémons</h2>
       <form @submit.prevent="update">
-        <h1>Connexion</h1>
+        <h1>Modification du profil</h1>
 
         <label><b>Email</b></label>
         <input
@@ -86,7 +85,6 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: red !important;
   width: 500px;
 
   padding: 30px;

@@ -1,38 +1,6 @@
 <template>
-  <div class="home">
-    <ul>
-      <li v-for="(product, index) in this.$store.state.products" :key="index">
-        <div class="left">
-          <img :src="product.image" :alt="product.name" />
-          <div class="body">
-            <span> {{ product.name }} </span>
-            <p>{{ product.description }}</p>
-          </div>
-        </div>
-        <span> {{ product.price }} </span>
-        <font-awesome-icon @click="addToWishList(product)" icon="heart" />
-        <font-awesome-icon @click="addToCart(product)" icon="cart-plus" />
-      </li>
-    </ul>
-  </div>
+  <div class="home"></div>
 </template>
-
-<script>
-import Header from "../components/Header.vue";
-
-export default {
-  name: "HomeView",
-  components: { Header },
-  methods: {
-    addToWishList(element) {
-      this.$store.commit("addToWishList", element);
-    },
-    addToCart(element) {
-      this.$store.commit("addToCart", element);
-    },
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .home {

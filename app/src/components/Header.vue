@@ -2,26 +2,40 @@
   <div>
     <nav>
       <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link v-show="!this.$store.state.connexion" to="/loginview"
-        >Login</router-link
-      >
-      <router-link v-show="!this.$store.state.connexion" to="/signupview"
-        >Signup</router-link
-      >
+      <div>
+        <router-link v-show="!this.$store.state.connexion" to="/loginview"
+          ><font-awesome-icon class="icon-user" icon="user" />
+          Login</router-link
+        >
+        <router-link v-show="!this.$store.state.connexion" to="/signupview"
+          ><font-awesome-icon
+            class="icon-user"
+            icon="user"
+          />Signup</router-link
+        >
+        <router-link v-show="this.$store.state.connexion" to="/listview"
+          ><font-awesome-icon icon="bicycle" /> Bike List</router-link
+        >
 
-      <router-link v-show="this.$store.state.connexion" to="/updateview"
-        >Updateview</router-link
-      >
-      <router-link v-show="this.$store.state.connexion" to="/wishlist"
-        >Wish List</router-link
-      >
-      <router-link v-show="this.$store.state.connexion" to="/cartview"
-        >Cart View</router-link
-      >
-      <router-link @click="logout" v-show="this.$store.state.connexion" to="/"
-        >Logout</router-link
-      >
+        <router-link v-show="this.$store.state.connexion" to="/wishlist"
+          ><font-awesome-icon icon="heart" /> Wish List</router-link
+        >
+        <router-link v-show="this.$store.state.connexion" to="/cartview"
+          ><font-awesome-icon icon="cart-shopping" />
+          Cart
+        </router-link>
+        <router-link v-show="this.$store.state.connexion" to="/updateview"
+          ><font-awesome-icon class="icon-user" icon="user" />Update
+          Profil</router-link
+        >
+        <router-link
+          @click="logout"
+          v-show="this.$store.state.connexion"
+          to="/loginview"
+          ><font-awesome-icon icon="arrow-right-from-bracket" />
+          Logout</router-link
+        >
+      </div>
     </nav>
   </div>
 </template>
@@ -47,8 +61,12 @@ nav {
   height: 7vh;
   background-color: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
+  .icon-user {
+    margin: 0 0.2rem;
+  }
 
   a {
     font-weight: bold;

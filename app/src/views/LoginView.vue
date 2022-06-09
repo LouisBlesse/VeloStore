@@ -2,8 +2,6 @@
   <div class="login">
     <section>
       <div id="container">
-        <!-- zone de connexion -->
-
         <form @submit.prevent="login">
           <h1>Connexion</h1>
 
@@ -57,7 +55,7 @@ export default {
           this.user.password
         );
         this.$store.state.connexion = true;
-        this.$router.push("/updateview");
+        this.$router.push("/listview");
       } catch (error) {
         switch (error.code) {
           case "auth/user-not-found":

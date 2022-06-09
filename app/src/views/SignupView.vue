@@ -5,8 +5,8 @@
         <form @submit.prevent="register">
           <h1>Inscription</h1>
 
-          <div>
-            <label for="pseudo">Pseudo* :</label>
+          <div class="item">
+            <label for="pseudo">Pseudo* </label>
             <input
               type="text"
               id="username"
@@ -14,12 +14,12 @@
               required
             />
           </div>
-          <div>
-            <label for="email">E-mail* :</label>
+          <div class="item">
+            <label for="email">E-mail* </label>
             <input type="email" id="email" v-model="newUser.email" required />
           </div>
-          <div>
-            <label for="name">Mot de passe* :</label>
+          <div class="item">
+            <label for="name">Mot de passe* </label>
             <input
               type="password"
               id="password"
@@ -47,9 +47,7 @@ import { getDatabase, ref, set } from "firebase/database";
 
 export default {
   components: {},
-  props: {
-    connected: {},
-  },
+  props: {},
   data() {
     return {
       newUser: {
@@ -91,7 +89,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 section {
   background: linear-gradient(#071e38, #040614);
   height: calc(100vh - 6vh);
@@ -120,6 +118,18 @@ form {
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 2px;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    label {
+      text-align: start;
+      margin: 0.2rem 0;
+    }
+    input {
+      padding-left: 5px;
+    }
+  }
 }
 
 form div + div {

@@ -4,7 +4,6 @@
       <div id="container">
         <form @submit.prevent="login">
           <h1>Connexion</h1>
-
           <label><b>Nom d'utilisateur ou E-mail</b></label>
           <input
             type="text"
@@ -80,7 +79,6 @@ section {
   display: flex;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  //   height: 100vh;
 }
 #container {
   width: 400px;

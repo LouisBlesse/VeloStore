@@ -18,15 +18,15 @@
         >
 
         <router-link v-show="this.$store.state.connexion" to="/wishlist"
-          ><font-awesome-icon icon="heart" /> Wish List</router-link
+          ><font-awesome-icon icon="heart" /> Liste de souhaits</router-link
         >
         <router-link v-show="this.$store.state.connexion" to="/cartview"
           ><font-awesome-icon icon="cart-shopping" />
-          Cart
+          Panier
         </router-link>
         <router-link v-show="this.$store.state.connexion" to="/updateview"
-          ><font-awesome-icon class="icon-user" icon="user" />Update
-          Profil</router-link
+          ><font-awesome-icon class="icon-user" icon="user" />modification
+          profil</router-link
         >
         <router-link
           @click="logout"

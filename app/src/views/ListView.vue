@@ -1,6 +1,9 @@
 <template>
   <div class="listview">
     <h2>Nos Vélos</h2>
+    <button @click="this.$router.push('/addbikeview')">
+      Ajouter un produit
+    </button>
     <ul>
       <li v-for="(product, index) in this.$store.state.products" :key="index">
         <font-awesome-icon
@@ -8,9 +11,7 @@
           @click="addToWishList(product)"
           icon="heart"
         />
-
         <img :src="product.image" :alt="product.name" />
-
         <h4>{{ product.name }}</h4>
         <span> {{ product.price }} €</span>
         <button>

@@ -40,6 +40,7 @@ export default createStore({
   },
   getters: {},
   mutations: {
+
     addToWishList(state, payload) {
       state.wishlist.push(payload);
     },

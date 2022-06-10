@@ -1,6 +1,6 @@
 <template>
   <div class="add-bike">
-    <form action="add-bike" @submit.prevent="addToProducts">
+    <form action="add-bike" @submit.prevent="addToDatabase">
       <h1>Ajouter un produit</h1>
       <div class="item">
         <label for="nom">Nom de l'article</label>
@@ -11,8 +11,16 @@
         <input type="text" v-model="article.price" />
       </div>
       <div class="item">
+        <label for="description">Description de l'article</label>
+        <input type="text" v-model="article.description" />
+      </div>
+      <div class="item">
         <label for="photo">Photo de l'article</label>
         <input type="text" v-model="article.image" />
+      </div>
+      <div class="item">
+        <label for="stock">En combien d'exemplaire voulez vous vendre cet article ?</label>
+        <input type="text" v-model="article.stock" />
       </div>
       <input type="submit" />
     </form>
@@ -20,6 +28,9 @@
 </template>
 
 <script>
+import {child, get, getDatabase, ref, set} from "firebase/database";
+import { uuid } from "vue-uuid";
+
 export default {
   name: "AddBikeView",
   data() {
@@ -28,6 +39,8 @@ export default {
         name: "",
         price: 0,
         image: "",
+        description: "",
+        stock:"",
       },
     };
   },
@@ -36,7 +49,18 @@ export default {
       this.$store.commit("addToProducts", this.article);
       this.$router.push("/listview");
     },
-  },
+    addToDatabase(){
+      const db = getDatabase();
+      set(ref(db, 'produits/'), {
+        description: this.article.description,
+        photo: this.article.description,
+        name: this.article.description,
+        prix: this.article.description,
+        stock : this.article.description,
+        id : uuid.v1(),
+      });
+    },
+   },
 };
 </script>
 

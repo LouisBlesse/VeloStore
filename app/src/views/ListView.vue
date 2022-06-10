@@ -5,7 +5,7 @@
       Ajouter un produit
     </button>
     <ul>
-      <li v-for="(product, index) in this.$store.state.products" :key="index">
+      <li v-for="product in this.listVelo" :key="product.id">
         <font-awesome-icon
           class="icon-heart"
           @click="addToWishList(product)"
@@ -29,6 +29,11 @@ import { getDatabase, ref, child, get } from "firebase/database";
 
 export default {
   name: "HomeView",
+  data() {
+    return {
+      listVelo:{}
+    }
+  },
   components: { Header },
   methods: {
     addToWishList(element) {
@@ -43,6 +48,7 @@ export default {
       get(child(dbRef, `produits/`)).then((snapshot) => {
         if (snapshot.exists()) {
           console.log(snapshot.val());
+          this.listVelo= (snapshot.val());
         } else {
           console.log("No data available");
         }

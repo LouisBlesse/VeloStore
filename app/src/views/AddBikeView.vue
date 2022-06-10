@@ -50,14 +50,16 @@ export default {
       this.$router.push("/listview");
     },
     addToDatabase(){
+      const id = uuid.v1()
+      console.log(id)
+      console.log(this.article)
       const db = getDatabase();
-      set(ref(db, 'produits/'), {
+      set(ref(db, 'produits/' +id), {
         description: this.article.description,
-        photo: this.article.description,
-        name: this.article.description,
-        prix: this.article.description,
-        stock : this.article.description,
-        id : uuid.v1(),
+        photo: this.article.image,
+        name: this.article.name,
+        prix: this.article.price,
+        stock : this.article.stock,
       });
     },
    },

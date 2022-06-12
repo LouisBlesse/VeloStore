@@ -19,7 +19,9 @@
         <input type="text" v-model="article.image" />
       </div>
       <div class="item">
-        <label for="stock">En combien d'exemplaire voulez vous vendre cet article ?</label>
+        <label for="stock"
+          >En combien d'exemplaire voulez vous vendre cet article ?</label
+        >
         <input type="text" v-model="article.stock" />
       </div>
       <input type="submit" />
@@ -28,7 +30,7 @@
 </template>
 
 <script>
-import {child, get, getDatabase, ref, set} from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import { uuid } from "vue-uuid";
 
 export default {
@@ -40,29 +42,29 @@ export default {
         price: 0,
         image: "",
         description: "",
-        stock:"",
+        stock: "",
       },
     };
   },
   methods: {
-    addToProducts() {
-      this.$store.commit("addToProducts", this.article);
-      this.$router.push("/listview");
-    },
-    addToDatabase(){
-      const id = uuid.v1()
-      console.log(id)
-      console.log(this.article)
+    // addToProducts() {
+    //   this.$store.commit("addToProducts", this.article);
+    // },
+    addToDatabase() {
+      const id = uuid.v1();
+      console.log(id);
+      console.log(this.article);
       const db = getDatabase();
-      set(ref(db, 'produits/' +id), {
+      set(ref(db, "produits/" + id), {
         description: this.article.description,
         photo: this.article.image,
         name: this.article.name,
         prix: this.article.price,
-        stock : this.article.stock,
+        stock: this.article.stock,
       });
+      this.$router.push("/listview");
     },
-   },
+  },
 };
 </script>
 

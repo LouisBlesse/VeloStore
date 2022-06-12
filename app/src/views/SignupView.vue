@@ -10,18 +10,27 @@
             <input
               type="text"
               id="username"
+              placeholder="Saisir le pseudo"
               v-model="newUser.username"
               required
             />
           </div>
           <div class="item">
             <label for="email">E-mail* </label>
-            <input type="email" id="email" v-model="newUser.email" required />
+            <input
+              type="email"
+              id="email"
+              placeholder="Saisir l'email"
+              v-model="newUser.email"
+              required
+            />
           </div>
           <div class="item">
             <label for="name">Mot de passe* </label>
+
             <input
               type="password"
+              placeholder="Saisir le mot de passe"
               id="password"
               v-model="newUser.password"
               autocomplete="on"
@@ -33,7 +42,7 @@
             <p id="errorSignUpMessage"></p>
           </div>
 
-          <input type="submit" value="S'inscrire" />
+          <input type="submit" id="submit" value="S'inscrire" />
         </form>
       </div>
     </section>
@@ -91,107 +100,68 @@ export default {
 
 <style lang="scss" scoped>
 section {
-  background: linear-gradient(#071e38, #040614);
+  background-color: #fff;
   height: calc(100vh - 6vh);
   display: flex;
   align-items: center;
-  font-family: "Montserrat", sans-serif;
-}
-#container {
   justify-content: center;
-  align-content: center;
-  margin: 0 auto;
-}
+  font-family: "Rubik";
 
-#container h1 {
-  margin: 0 auto;
-  padding-bottom: 10px;
-  border-radius: 2px;
-  text-align: center;
-}
+  #container {
+    form {
+      padding: 30px;
+      border: 1px solid #f1f1f1;
+      width: 641px;
+      height: 457px;
+      background: #ffffff;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-form {
-  border-radius: 1em;
+      .item {
+        display: flex;
+        flex-direction: column;
+        margin: 0.6rem 0;
 
-  padding: 30px;
-  border: 1px solid #f1f1f1;
-  background: #fff;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  border-radius: 2px;
+        label {
+          margin: 0.4rem 0;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 19px;
+          color: #000000;
+        }
 
-  .item {
-    display: flex;
-    flex-direction: column;
-    label {
-      text-align: start;
-      margin: 0.2rem 0;
-    }
-    input {
-      padding-left: 5px;
+        input {
+          width: 272px;
+          height: 40px;
+          background: #ffffff;
+          border: 1px solid #dddddd;
+          border-radius: 10px;
+          padding-left: 5px;
+          outline: none;
+        }
+      }
+
+      h1 {
+        text-align: center;
+        margin: 1rem;
+      }
+
+      #submit {
+        background: #444343;
+        color: #fff;
+        border-radius: 50px;
+        border: none;
+        padding: 1rem 2.5rem;
+        margin: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
-}
-
-form div + div {
-  margin-top: 1.5em;
-}
-
-input[type="submit"] {
-  background-color: #e59c3a;
-  color: white;
-  padding: 14px 20px;
-  margin: 20px 0 8px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid #e59c3a;
-}
-
-input[type="submit"]:hover {
-  background-color: white;
-  color: #e59c3a;
-  border: 1px solid #e59c3a;
-}
-
-label {
-  /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
-  display: inline-block;
-  color: black;
-  width: 125px;
-  text-align: right;
-}
-
-input,
-textarea {
-  /* Pour s'assurer que tous les champs texte ont la même police.
-     Par défaut, les textarea ont une police monospace */
-  font: 1em sans-serif;
-
-  /* Pour que tous les champs texte aient la même dimension */
-  width: 300px;
-  box-sizing: border-box;
-
-  /* Pour harmoniser le look & feel des bordures des champs texte */
-  border: 1px solid #999;
-}
-
-form div input {
-  height: 30px;
-  border-radius: 3px;
-}
-
-input:focus,
-textarea:focus {
-  /* Pour souligner légèrement les éléments actifs */
-  border-color: #000;
-}
-
-form div {
-  margin: 20px;
-}
-
-p {
-  color: red;
 }
 </style>

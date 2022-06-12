@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header">
     <nav>
       <router-link to="/">Home</router-link>
       <div>
@@ -56,25 +56,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-nav {
-  padding: 30px;
-  height: 7vh;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.header {
+  background-image: url("../assets/header_background.png");
+  nav {
+    padding: 30px;
+    height: 7vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  .icon-user {
-    margin: 0 0.2rem;
-  }
+    .icon-user {
+      margin: 0 0.2rem;
+    }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    margin: 0 0.4rem;
+    a {
+      font-weight: bold;
+      color: #fff;
+      margin: 0 0.4rem;
+      text-decoration: none;
 
-    &.router-link-exact-active {
-      color: #42b983;
+      &.router-link-exact-active {
+        text-decoration: underline;
+      }
     }
   }
 }

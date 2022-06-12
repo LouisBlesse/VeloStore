@@ -4,6 +4,19 @@
     <button @click="this.$router.push('/addbikeview')">
       Ajouter un produit
     </button>
+    <div class="filter">
+      <input type="text" v-model="name" placeholder="saisir le nom" />
+      <select name="pertinance" id="select">
+        <option value="">Type</option>
+        <option value="dog">Vélos</option>
+        <option value="cat">Accessoires</option>
+      </select>
+      <select name="pertinance" id="select">
+        <option value="">Pertinence</option>
+        <option value="dog">+ chère</option>
+        <option value="cat">- chère</option>
+      </select>
+    </div>
     <ul>
       <li v-for="product in this.listVelo" :key="product.id">
         <font-awesome-icon
@@ -11,13 +24,24 @@
           @click="addToWishList(product)"
           icon="heart"
         />
-        <img :src="product.image" :alt="product.name" />
+        <!-- <img :src="product.image" :alt="product.name" /> -->
+        <!-- <img src="../assets/bike_one.png" :alt="product.name" />
+        <img src="" alt="" /> -->
         <h4>{{ product.name }}</h4>
-        <span> {{ product.price }} €</span>
-        <button>
-          Ajouter un produit
-          <font-awesome-icon @click="addToCart(product)" icon="cart-plus" />
-        </button>
+
+        <div class="card-top">
+          <!-- <h4>L'urbain</h4> -->
+          <span> {{ product.price }} €</span>
+          <font-awesome-icon
+            class="icon-cart-plus"
+            @click="addToCart(product)"
+            icon="cart-plus"
+          />
+        </div>
+        <!-- <div class="cart-body">
+          <p>Louis Blesse</p>
+          <p>50 €</p>
+        </div> -->
       </li>
     </ul>
   </div>
@@ -31,8 +55,8 @@ export default {
   name: "HomeView",
   data() {
     return {
-      listVelo:{}
-    }
+      listVelo: {},
+    };
   },
   components: { Header },
   methods: {
@@ -42,30 +66,32 @@ export default {
     addToCart(element) {
       this.$store.commit("addToCart", element);
     },
-    getData(){
+    getData() {
       const dbRef = ref(getDatabase());
 
-      get(child(dbRef, `produits/`)).then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-          this.listVelo= (snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
-    }
+      get(child(dbRef, `produits/`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            this.listVelo = snapshot.val();
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
   mounted() {
     this.getData();
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .listview {
-  background: linear-gradient(#071e38, #040614);
+  background: #fff;
   min-height: 100vh;
   color: #fff;
   display: flex;
@@ -78,6 +104,35 @@ export default {
     margin: 3rem 0;
   }
 
+  .filter {
+    width: 1089px;
+    height: 112px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    input {
+      width: 195px;
+      height: 40px;
+      background: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 10px;
+      padding-left: 10px;
+    }
+
+    select {
+      padding-left: 10px;
+      width: 195px;
+      height: 40px;
+      background: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 10px;
+    }
+  }
+
   ul {
     justify-content: center;
     display: flex;
@@ -86,19 +141,42 @@ export default {
     padding: 3rem;
 
     li {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      margin: 1rem;
-      width: 200px;
-      background-color: rgb(119, 184, 219);
-      color: #071e38;
-      border-radius: 5px;
+      width: 100px;
+      list-style-type: none;
       position: relative;
+      color: #000000;
+      width: 319px;
+      height: 289px;
+      background: #ffffff;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      margin: 1rem;
 
-      h4 {
-        font-size: 1.6rem;
-        padding-left: 0.3rem;
+      .card-top {
+        display: flex;
+        align-items: center;
+        h4 {
+          font-size: 20px;
+          padding-left: 0.6rem;
+          padding-top: 0.5rem !important;
+          padding: 0 1.3rem;
+        }
+        .icon-cart-plus {
+          padding-left: 0.6rem;
+          font-size: 20px;
+        }
+      }
+
+      .cart-body {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #aaaaaa;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.3rem;
       }
 
       .icon-heart {
@@ -106,6 +184,7 @@ export default {
         top: 0;
         right: 0;
         padding: 1rem;
+        color: #fff;
       }
 
       span {
@@ -114,9 +193,11 @@ export default {
       }
 
       img {
-        width: 90%;
-        height: 150px;
-        margin: 0.3rem auto;
+        width: 319px;
+        height: 166px;
+        border-radius: 1px;
+        background-size: cover;
+        // margin: 0.3rem auto;
       }
 
       button {

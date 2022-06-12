@@ -16,7 +16,7 @@
       </div>
       <div class="item">
         <label for="photo">Photo de l'article</label>
-        <input type="text" v-model="article.image" />
+        <input type="file" accept="image/png, image/jpeg" @change="onFileChange"/>
       </div>
       <div class="item">
         <label for="stock"
@@ -32,6 +32,7 @@
 <script>
 import { getDatabase, ref, set } from "firebase/database";
 import { uuid } from "vue-uuid";
+import { getStorage, ref as refStore, uploadBytes } from "firebase/storage";
 
 export default {
   name: "AddBikeView",
@@ -50,14 +51,42 @@ export default {
     // addToProducts() {
     //   this.$store.commit("addToProducts", this.article);
     // },
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      var reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.article.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+
     addToDatabase() {
       const id = uuid.v1();
+      ////////////Image
+      const storage = getStorage();
+      const spaceRef = refStore(storage, "Velos/" + id);
+
+      const metadata = {
+        contentType: 'image/png',
+      };
+
+      uploadBytes(spaceRef, this.article.image, metadata).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+      });
+
+      ///////////Datas
       console.log(id);
       console.log(this.article);
       const db = getDatabase();
       set(ref(db, "produits/" + id), {
         description: this.article.description,
-        photo: this.article.image,
+        photo: spaceRef.fullPath,
         name: this.article.name,
         prix: this.article.price,
         stock: this.article.stock,

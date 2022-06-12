@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWAp9g0t1NAt508HwD6n-4dU7jjkYyBJA",
@@ -13,6 +14,15 @@ const firebaseConfig = {
   measurementId: "G-MV2BFNX3T3",
 };
 
-const app = initializeApp(firebaseConfig);
+const firebaseConfigStorage = {
+  apiKey: "AIzaSyAWAp9g0t1NAt508HwD6n-4dU7jjkYyBJA",
+  authDomain: "velostore-124cf.firebaseapp.com",
+  databaseURL: "gs://velostore-124cf.appspot.com",
+  storageBucket: "Velos"
+};
 
+const app = initializeApp(firebaseConfig);
+//const firebaseApp = initializeApp(firebaseConfigStorage);
+
+//const storage = getStorage(firebaseApp);
 export { app };

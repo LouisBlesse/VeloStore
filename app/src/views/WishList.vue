@@ -1,7 +1,7 @@
 <template>
   <div class="wishlist">
     <h2>Liste de souhaits</h2>
-    <p v-if="this.$store.state.wishlist.length === 0">
+    <p v-if="wishlist.length === 0">
       Il n'y a pas de produits la liste de souhaits
     </p>
     <ul>
@@ -45,7 +45,6 @@ export default {
       const db = getDatabase();
 
       remove(ref(db, `wishlist/` + index.key));
-      console.log();
     },
     getAllWishList() {
       const dbRef = ref(getDatabase());
@@ -53,14 +52,9 @@ export default {
       get(child(dbRef, `wishlist/`))
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log(snapshot.val());
-
-            // this.arrayCart = snapshot.val();
-
             let returnArr = [];
 
             snapshot.forEach(function (childSnapshot) {
-              // console.log(childSnapshot.key);
               var item = childSnapshot.val();
               item.key = childSnapshot.key;
               returnArr.push(item);
@@ -135,6 +129,9 @@ export default {
       background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
+      span {
+        color: #000000;
+      }
       .left {
         display: flex;
         width: 90%;

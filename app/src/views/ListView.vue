@@ -30,7 +30,7 @@
         <div class="card-top">
           <span> {{ product.price }} €</span>
           <font-awesome-icon
-            class="icon-cart-plus"
+            :class="test ? 'icon-cart-plus' : ''"
             @click="addToCart(product)"
             icon="cart-plus"
           />
@@ -51,13 +51,11 @@ export default {
   data() {
     return {
       listVelo: [],
+      test: false,
     };
   },
   components: { Header },
   methods: {
-    // addToWishList(element) {
-    //   this.$store.commit("addToWishList", element);
-    // },
     addToCart(element) {
       const id = uuid.v1();
       const db = getDatabase();
@@ -68,27 +66,39 @@ export default {
         id_user: user.uid,
         id_produit: element.key,
       });
-      // this.$store.commit("addToCart", element);
     },
+
     addToWishList(element) {
       const id = uuid.v1();
       const db = getDatabase();
-
       const auth = getAuth();
       const user = auth.currentUser;
+      const dbRef = ref(getDatabase());
+
+      get(child(dbRef, `wishlist/`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          snapshot.forEach((childSnapshot) => {
+            if (childSnapshot.val().id_user === user.uid) {
+              if (element.key === childSnapshot.val().id_produit) {
+                console.log("l'élément existe");
+              }
+            }
+          });
+        }
+      });
+
       set(ref(db, "wishlist/" + id), {
         id_user: user.uid,
         id_produit: element.key,
       });
-      // this.$store.commit("addToCart", element);
     },
+
     getData() {
       const dbRef = ref(getDatabase());
 
       get(child(dbRef, `produits/`))
         .then((snapshot) => {
           if (snapshot.exists()) {
-            // snapshot.val();
             var returnArr = [];
 
             snapshot.forEach(function (childSnapshot) {
@@ -187,6 +197,7 @@ export default {
         .icon-cart-plus {
           padding-left: 0.6rem;
           font-size: 20px;
+          color: white;
         }
       }
 

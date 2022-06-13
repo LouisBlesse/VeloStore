@@ -93,6 +93,7 @@ export default {
       const auth = getAuth();
       const user = auth.currentUser;
       const dbRef = ref(getDatabase());
+      var existe = 0;
 
       get(child(dbRef, `wishlist/`)).then((snapshot) => {
         if (snapshot.exists()) {
@@ -100,16 +101,20 @@ export default {
             if (childSnapshot.val().id_user === user.uid) {
               if (element.key === childSnapshot.val().id_produit) {
                 console.log("l'élément existe");
+                existe = 1;
               }
             }
           });
         }
-      });
-
-      set(ref(db, "wishlist/" + id), {
-        id_user: user.uid,
-        id_produit: element.key,
-      });
+      } ).then(() => {
+        if (existe==0){
+          console.log("envoie");
+          set(ref(db, "wishlist/" + id), {
+            id_user: user.uid,
+            id_produit: element.key,
+          });
+        }}
+      );
     },
 
     getData() {

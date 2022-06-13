@@ -55,7 +55,8 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length)
         return;
-      this.createImage(files[0]);
+      this.article.image = files[0];
+      //this.createImage(files[0]);
     },
     createImage(file) {
       var reader = new FileReader();

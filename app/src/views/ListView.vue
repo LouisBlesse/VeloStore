@@ -83,7 +83,7 @@ export default {
 
           })
           .catch((error) => {
-            // Handle any errors
+            // Handle any error
           });
     },
 

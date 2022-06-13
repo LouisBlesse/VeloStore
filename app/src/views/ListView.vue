@@ -24,11 +24,11 @@
           @click="addToWishList(product)"
           icon="heart"
         />
-        <img :src="product.image" :alt="product.name" />
+        <img :id=product.photo :src="i" :alt="product.photo" :onerror="getImage(product.photo)" />
         <h4>{{ product.name }}</h4>
 
         <div class="card-top">
-          <span> {{ product.price }} €</span>
+          <span> {{ product.prix }} €</span>
           <font-awesome-icon
             :class="test ? 'icon-cart-plus' : ''"
             @click="addToCart(product)"
@@ -45,6 +45,7 @@ import Header from "../components/Header.vue";
 import { getDatabase, ref, child, get, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { uuid } from "vue-uuid";
+import { getStorage, ref as refStore, getDownloadURL } from "firebase/storage";
 
 export default {
   name: "HomeView",
@@ -66,6 +67,24 @@ export default {
         id_user: user.uid,
         id_produit: element.key,
       });
+    },
+
+    getImage(key){
+      const storage = getStorage();
+      console.log("key : " + key);
+      getDownloadURL(refStore(storage,'gs://velostore-124cf.appspot.com/'+ key))
+          .then((url) => {
+            // `url` is the download URL for 'images/stars.jpg'
+
+            // This can be downloaded directly:
+           const img = document.getElementById(key);
+            img.setAttribute('src', url);
+            console.log("url:" +url);
+
+          })
+          .catch((error) => {
+            // Handle any errors
+          });
     },
 
     addToWishList(element) {

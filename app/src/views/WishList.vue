@@ -5,32 +5,21 @@
       Il n'y a pas de produits la liste de souhaits
     </p>
     <ul>
-      <li v-for="(product, index) in this.$store.state.wishlist" :key="index">
+      <li v-for="(product, index) in wishlist" :key="index">
         <div class="left">
-          <!-- <img :src="product.image" :alt="product.name" /> -->
-          <img src="../assets/bike_one.png" :alt="product.name" />
+          <img :src="product.image" :alt="product.name" />
 
           <div class="body">
-            <!-- <span> {{ product.name }} </span>  -->
-            <span id="title"> L'Urbain</span>
+            <span> {{ product.name }} </span>
             <font-awesome-icon class="cart-icon" icon="cart-plus" />
 
-            <!-- <p>{{ product.description }}</p> -->
-            <p id="overview">
-              Avec son cadre semi-ouvert, le modèle Urbain offre les mêmes
-              caractéristiques que son homologue Sport, en proposant une
-              position plus droite. Barre tombante, guidon tournant plus souple,
-              il assurera une conduite plus douce et tranquille. Il est donc
-              parfaitement adapté autant à la mobilité urbaine qu’à vos plus
-              belles balades en campagne. Disponible en blanc et noir.
-            </p>
+            <p>{{ product.description }}</p>
           </div>
         </div>
-        <!-- <span> {{ product.price }} </span> -->
         <div class="right">
-          <span id="price">50€</span>
+          <span> {{ product.price }} </span>
           <font-awesome-icon
-            @click="deleteItemOfWishList(product.id)"
+            @click="deleteItemOfWishList(product)"
             class="close-icon"
             icon="circle-xmark"
           />
@@ -41,20 +30,70 @@
 </template>
 
 <script>
+import { getDatabase, ref, child, get, remove, t } from "firebase/database";
+import { getAuth } from "firebase/auth";
+
 export default {
   name: "WishList",
   data() {
-    return {};
+    return {
+      wishlist: [],
+    };
   },
   methods: {
     deleteItemOfWishList(index) {
-      console.log(index);
-      let elementToDelete = this.$store.state.wishlist.findIndex(
-        (x) => x.id === index
-      );
-      this.$store.state.wishlist.splice(elementToDelete, 1);
-      index = undefined;
+      const db = getDatabase();
+
+      remove(ref(db, `wishlist/` + index.key));
+      console.log();
     },
+    getAllWishList() {
+      const dbRef = ref(getDatabase());
+
+      get(child(dbRef, `wishlist/`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+
+            // this.arrayCart = snapshot.val();
+
+            let returnArr = [];
+
+            snapshot.forEach(function (childSnapshot) {
+              // console.log(childSnapshot.key);
+              var item = childSnapshot.val();
+              item.key = childSnapshot.key;
+              returnArr.push(item);
+            });
+
+            const auth = getAuth();
+            const user = auth.currentUser;
+
+            for (const iterator of returnArr) {
+              if (iterator.id_user === user.uid) {
+                get(child(dbRef, `produits/` + iterator.id_produit)).then(
+                  (snapshot) => {
+                    if (snapshot.exists()) {
+                      let objet = {};
+                      objet = snapshot.val();
+                      objet.key = iterator.key;
+                      this.wishlist.push(objet);
+                    }
+                  }
+                );
+              }
+            }
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
+  mounted() {
+    this.getAllWishList();
   },
 };
 </script>

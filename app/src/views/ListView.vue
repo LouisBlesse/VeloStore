@@ -55,9 +55,9 @@ export default {
   },
   components: { Header },
   methods: {
-    addToWishList(element) {
-      this.$store.commit("addToWishList", element);
-    },
+    // addToWishList(element) {
+    //   this.$store.commit("addToWishList", element);
+    // },
     addToCart(element) {
       const id = uuid.v1();
       const db = getDatabase();
@@ -65,6 +65,18 @@ export default {
       const auth = getAuth();
       const user = auth.currentUser;
       set(ref(db, "panier/" + id), {
+        id_user: user.uid,
+        id_produit: element.key,
+      });
+      // this.$store.commit("addToCart", element);
+    },
+    addToWishList(element) {
+      const id = uuid.v1();
+      const db = getDatabase();
+
+      const auth = getAuth();
+      const user = auth.currentUser;
+      set(ref(db, "wishlist/" + id), {
         id_user: user.uid,
         id_produit: element.key,
       });
@@ -196,7 +208,7 @@ export default {
         top: 0;
         right: 0;
         padding: 1rem;
-        color: #fff;
+        color: black;
       }
 
       span {

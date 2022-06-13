@@ -56,7 +56,6 @@ export default {
   methods: {
     deleteItemOfCart(element) {
       const db = getDatabase();
-      console.log(element);
       remove(ref(db, `panier/` + element.key));
     },
     getAllProduct() {

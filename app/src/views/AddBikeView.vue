@@ -1,31 +1,38 @@
 <template>
   <div class="add-bike">
-    <form action="add-bike" @submit.prevent="addToDatabase">
-      <h1>Ajouter un produit</h1>
-      <div class="item">
-        <label for="nom">Nom de l'article</label>
-        <input type="text" v-model="article.name" />
-      </div>
-      <div class="item">
-        <label for="prix">Prix de l'article</label>
-        <input type="text" v-model="article.price" />
-      </div>
-      <div class="item">
-        <label for="description">Description de l'article</label>
-        <input type="text" v-model="article.description" />
-      </div>
-      <div class="item">
-        <label for="photo">Photo de l'article</label>
-        <input type="file" accept="image/png, image/jpeg" @change="onFileChange"/>
-      </div>
-      <div class="item">
-        <label for="stock"
-          >En combien d'exemplaire voulez vous vendre cet article ?</label
-        >
-        <input type="text" v-model="article.stock" />
-      </div>
-      <input type="submit" />
-    </form>
+    <section>
+      <form action="add-bike" @submit.prevent="addToDatabase">
+        <h1>Ajouter un produit</h1>
+        <div class="item">
+          <label for="nom">Nom de l'article</label>
+          <input type="text" v-model="article.name" />
+        </div>
+        <div class="item">
+          <label for="prix">Prix de l'article</label>
+          <input type="text" v-model="article.price" />
+        </div>
+        <div class="item">
+          <label for="description">Description de l'article</label>
+          <textarea v-model="article.description"></textarea>
+        </div>
+        <div class="item inputfile">
+          <label for="inputPhoto">Photo de l'article
+            <div class="fileclick">
+              <i class="fa fa-2x fa-camera"></i>
+              <input id="inputPhoto" type="file" accept="image/png, image/jpeg" @change="onFileChange"/>
+              <span id="imageName"></span>
+            </div>
+          </label>
+        </div>
+        <div class="item">
+          <label for="stock"
+            >Nombre d'exemplaire de l'article à vendre</label
+          >
+          <input type="number" v-model="article.stock" />
+        </div>
+        <input type="submit" id="submit" />
+      </form>
+    </section>
   </div>
 </template>
 
@@ -99,49 +106,98 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.add-bike {
-  background: linear-gradient(#071e38, #040614);
-  height: calc(100vh - 7vh);
+section {
+  // background: linear-gradient(#071e38, #040614);
+  background-color: #fff;
+  height: calc(100vh - 6vh);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: "Rubik";
 
   form {
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    width: 641px;
+    height: 700px;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-    width: 400px;
-    height: 400px;
     align-items: center;
-    justify-content: center;
 
     h1 {
       text-align: center;
-      margin: 0.4rem;
+      margin: 1rem;
     }
 
     .item {
       display: flex;
       flex-direction: column;
-      width: 80%;
-
-      input[type="text"],
-      input[type="email"],
-      input[type="password"] {
-        width: 100%;
-        padding: 12px 10px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        border-radius: 4px;
-      }
-
+      margin: 0.6rem 0;
       label {
-        color: black;
-        margin: 0.3rem;
+        margin: 0.4rem 0;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000000;
       }
+
+      input,
+      textarea {
+        width: 272px;
+        height: 40px;
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+        padding-left: 5px;
+        outline: none;
+      }
+
+      textarea{
+        height: 100px;
+      }
+    }
+
+    .inputfile {
+
+      .fileclick {
+        text-align:center;
+        padding:3%;
+        border:thin solid black;
+        width: 272px;
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+        outline: none;
+      }
+
+      input {
+        display: none;
+      }
+      label {
+        cursor:pointer;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #imageName {
+        color:green;
+      }
+    }
+    
+    #submit {
+      background: #444343;
+      color: #fff;
+      border-radius: 50px;
+      border: none;
+      padding: 1rem 2.5rem;
+      margin: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

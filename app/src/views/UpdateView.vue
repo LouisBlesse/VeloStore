@@ -3,31 +3,36 @@
     <section>
       <form @submit.prevent="update">
         <h1>Modification du profil</h1>
-
-        <label><b>Email</b></label>
-        <input
-          type="email"
-          v-model="user.email"
-          placeholder="Entrer l'email"
-          name="email"
-          required
-        />
-        <label><b>Password</b></label>
-        <input
-          type="password"
-          v-model="user.password"
-          placeholder="Entrer le password"
-          name="password"
-          required
-        />
-        <label><b>Pseudo</b></label>
-        <input
-          type="text"
-          v-model="user.username"
-          placeholder="Entrer le pseudo"
-          name="username"
-          required
-        />
+        <div class="item">
+          <label><b>Email</b></label>
+          <input
+            type="email"
+            v-model="user.email"
+            placeholder="Entrer l'email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="item">
+          <label><b>Password</b></label>
+          <input
+            type="password"
+            v-model="user.password"
+            placeholder="Entrer le password"
+            name="password"
+            required
+          />
+        </div>
+        <div class="item">
+          <label><b>Pseudo</b></label>
+          <input
+            type="text"
+            v-model="user.username"
+            placeholder="Entrer le pseudo"
+            name="username"
+            required
+          />
+        </div>
 
         <div>
           <p id="errorLogInMessage"></p>
@@ -79,102 +84,66 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.update {
-  background: linear-gradient(#071e38, #040614);
-  height: calc(100vh - 7vh);
+section {
+  // background: linear-gradient(#071e38, #040614);
+  background-color: #fff;
+  height: calc(100vh - 6vh);
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-
-form {
-  border-radius: 1em;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  // align-items: start;
-  width: 500px;
-  padding: 30px;
-  border: 1px solid #f1f1f1;
-  background: #fff;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  border-radius: 2px;
+  font-family: "Rubik";
 
-  h1 {
-    text-align: center;
+  form {
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    width: 641px;
+    height: 457px;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      text-align: center;
+      margin: 1rem;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      margin: 0.6rem 0;
+      label {
+        margin: 0.4rem 0;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000000;
+      }
+
+      input {
+        width: 272px;
+        height: 40px;
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+        padding-left: 5px;
+        outline: none;
+      }
+    }
+    #submit {
+      background: #444343;
+      color: #fff;
+      border-radius: 50px;
+      border: none;
+      padding: 1rem 2.5rem;
+      margin: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
-
-  /* Full-width inputs */
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 12px 10px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 4px;
-  }
-
-  label {
-    color: black;
-    margin: 0.3rem;
-  }
-}
-
-form div + div {
-  margin-top: 1.5em;
-}
-
-input[type="submit"] {
-  background-color: #e59c3a;
-  color: white;
-  padding: 14px 20px;
-  margin: 20px 0 8px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid #e59c3a;
-}
-
-input[type="submit"]:hover {
-  background-color: white;
-  color: #e59c3a;
-  border: 1px solid #e59c3a;
-}
-
-input,
-textarea {
-  /* Pour s'assurer que tous les champs texte ont la même police.
-     Par défaut, les textarea ont une police monospace */
-  font: 1em sans-serif;
-
-  /* Pour que tous les champs texte aient la même dimension */
-  width: 300px;
-  box-sizing: border-box;
-
-  /* Pour harmoniser le look & feel des bordures des champs texte */
-  border: 1px solid #999;
-}
-
-form div input {
-  height: 30px;
-  border-radius: 3px;
-}
-
-input:focus,
-textarea:focus {
-  /* Pour souligner légèrement les éléments actifs */
-  border-color: #000;
-}
-
-form div {
-  margin: 20px;
-}
-
-p {
-  color: red;
 }
 </style>

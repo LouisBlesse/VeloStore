@@ -68,29 +68,57 @@ export default {
       });
     },
 
+    pushData(uid, produit_id, id) {
+      const db = getDatabase();
+      set(ref(db, "wishlist/" + id), {
+        id_user: uid,
+        id_produit: produit_id,
+      });
+    },
+
+    checkIfItemExistInWishList(element) {
+      const dbRef = ref(getDatabase());
+      const auth = getAuth();
+      const user = auth.currentUser;
+      get(child(dbRef, `wishlist/`)).then((snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          if (
+            childSnapshot.val().id_user === user.uid &&
+            childSnapshot.val().id_produit === element.key
+          ) {
+            return true;
+          }
+        });
+      });
+
+      console.log(element);
+    },
+
     addToWishList(element) {
       const id = uuid.v1();
-      const db = getDatabase();
       const auth = getAuth();
       const user = auth.currentUser;
       const dbRef = ref(getDatabase());
-
+      var test = false;
+      var array = [];
       get(child(dbRef, `wishlist/`)).then((snapshot) => {
-        if (snapshot.exists()) {
-          snapshot.forEach((childSnapshot) => {
-            if (childSnapshot.val().id_user === user.uid) {
-              if (element.key === childSnapshot.val().id_produit) {
-                console.log("l'élément existe");
-              }
-            }
-          });
-        }
+        snapshot.forEach((childSnapshot) => {
+          // if (
+          //   childSnapshot.val().id_user === user.uid &&
+          //   childSnapshot.val().id_produit === element.key
+          // ) {
+          //   test = true;
+          // }
+          array.push(childSnapshot);
+        });
       });
 
-      set(ref(db, "wishlist/" + id), {
-        id_user: user.uid,
-        id_produit: element.key,
-      });
+      console.log(array);
+
+      // verif si lelement est déjà present dans la wishlist
+      // console.log(this.checkIfItemExistInWishList(element));
+      console.log(test);
+      this.pushData(user.uid, element.key, id);
     },
 
     getData() {
@@ -119,6 +147,7 @@ export default {
   },
   mounted() {
     this.getData();
+    // this.checkIfItemExistInWishList();
   },
 };
 </script>

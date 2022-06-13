@@ -1,25 +1,22 @@
 <template>
   <div class="wishlist">
     <h2>Panier</h2>
-    <p v-if="this.$store.state.cart.length === 0">
+    <!-- <p v-if="this.$store.state.getProduit.length === 0">
       vous n'avez pas encore ajouter d'élément dans le panier
-    </p>
-    <div class="container" v-if="this.$store.state.cart.length !== 0">
+    </p> -->
+    <div class="container">
       <ul>
-        <li v-for="(product, index) in this.$store.state.cart" :key="index">
+        <li v-for="(product, index) in getProduit" :key="index">
           <div class="left">
-            <!-- <img :src="product.image" :alt="product.name" /> -->
-            <img src="../assets/bike_one.png" :alt="product.name" />
+            <img :src="product.image" :alt="product.name" />
+            <img src="../assets/bike_one.png" :alt="product.name" />n
 
             <div class="body">
-              <!-- <span> {{ product.name }} </span> -->
-              <span id="title">L'Urbain</span>
-              <span id="price"> 50€</span>
+              <span> {{ product.name }} </span>
             </div>
           </div>
-          <!-- <span> {{ product.price }} </span> -->
           <font-awesome-icon
-            @click="deleteItemOfCart(product.id)"
+            @click="deleteItemOfCart(product)"
             class="close-icon"
             icon="circle-xmark"
           />
@@ -36,20 +33,77 @@
 </template>
 
 <script>
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+  remove,
+  forceLongPolling,
+  // set,
+  // forceLongPolling,
+} from "firebase/database";
+import { getAuth } from "firebase/auth";
+
 export default {
   name: "CartView",
   data() {
-    return {};
+    return {
+      arrayCart: [],
+      getProduit: [],
+    };
   },
   methods: {
-    deleteItemOfCart(index) {
-      console.log(index);
-      let elementToDelete = this.$store.state.cart.findIndex(
-        (x) => x.id === index
-      );
-      this.$store.state.cart.splice(elementToDelete, 1);
-      index = undefined;
+    deleteItemOfCart(element) {
+      const db = getDatabase();
+      console.log(element);
+      remove(ref(db, `panier/` + element.key));
     },
+    getAllProduct() {
+      const dbRef = ref(getDatabase());
+
+      get(child(dbRef, `panier/`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            var returnArr = [];
+
+            this.arrayCart = snapshot.val();
+
+            snapshot.forEach(function (childSnapshot) {
+              // console.log(childSnapshot.key);
+              var item = childSnapshot.val();
+              item.key = childSnapshot.key;
+              returnArr.push(item);
+            });
+
+            const auth = getAuth();
+            const user = auth.currentUser;
+
+            for (const iterator of returnArr) {
+              if (iterator.id_user === user.uid) {
+                get(child(dbRef, `produits/` + iterator.id_produit)).then(
+                  (snapshot) => {
+                    if (snapshot.exists()) {
+                      let objet = {};
+                      objet = snapshot.val();
+                      objet.key = iterator.key;
+                      this.getProduit.push(objet);
+                    }
+                  }
+                );
+              }
+            }
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
+  mounted() {
+    this.getAllProduct();
   },
 };
 </script>

@@ -18,19 +18,16 @@
       </select>
     </div>
     <ul>
-      <li v-for="product in this.listVelo" :key="product.id">
+      <li v-for="product in this.listVelo" :key="product.key">
         <font-awesome-icon
           class="icon-heart"
           @click="addToWishList(product)"
           icon="heart"
         />
-        <!-- <img :src="product.image" :alt="product.name" /> -->
-        <!-- <img src="../assets/bike_one.png" :alt="product.name" />
-        <img src="" alt="" /> -->
+        <img :src="product.image" :alt="product.name" />
         <h4>{{ product.name }}</h4>
 
         <div class="card-top">
-          <!-- <h4>L'urbain</h4> -->
           <span> {{ product.price }} €</span>
           <font-awesome-icon
             class="icon-cart-plus"
@@ -38,10 +35,6 @@
             icon="cart-plus"
           />
         </div>
-        <!-- <div class="cart-body">
-          <p>Louis Blesse</p>
-          <p>50 €</p>
-        </div> -->
       </li>
     </ul>
   </div>
@@ -49,13 +42,15 @@
 
 <script>
 import Header from "../components/Header.vue";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, child, get, set } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { uuid } from "vue-uuid";
 
 export default {
   name: "HomeView",
   data() {
     return {
-      listVelo: {},
+      listVelo: [],
     };
   },
   components: { Header },
@@ -64,7 +59,16 @@ export default {
       this.$store.commit("addToWishList", element);
     },
     addToCart(element) {
-      this.$store.commit("addToCart", element);
+      const id = uuid.v1();
+      const db = getDatabase();
+
+      const auth = getAuth();
+      const user = auth.currentUser;
+      set(ref(db, "panier/" + id), {
+        id_user: user.uid,
+        id_produit: element.key,
+      });
+      // this.$store.commit("addToCart", element);
     },
     getData() {
       const dbRef = ref(getDatabase());
@@ -72,8 +76,16 @@ export default {
       get(child(dbRef, `produits/`))
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log(snapshot.val());
-            this.listVelo = snapshot.val();
+            // snapshot.val();
+            var returnArr = [];
+
+            snapshot.forEach(function (childSnapshot) {
+              var item = childSnapshot.val();
+              item.key = childSnapshot.key;
+              returnArr.push(item);
+            });
+
+            this.listVelo = returnArr;
           } else {
             console.log("No data available");
           }

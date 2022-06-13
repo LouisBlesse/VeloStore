@@ -7,11 +7,11 @@
     <ul>
       <li v-for="(product, index) in wishlist" :key="index">
         <div class="left">
-          <img :src="product.image" :alt="product.name" />
+          <img :src="product.photo" :alt="product.name" />
 
           <div class="body">
             <span> {{ product.name }} </span>
-            <font-awesome-icon class="cart-icon" icon="cart-plus" />
+            <font-awesome-icon class="cart-icon" icon="cart-plus" @click="buy(product)"/>
 
             <p>{{ product.description }}</p>
           </div>

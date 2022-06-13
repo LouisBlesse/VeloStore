@@ -18,19 +18,21 @@
       </select>
     </div>
     <ul>
-      <li v-for="product in this.listVelo" :key="product.key" @click="this.$router.push(`/articleview/${product.key}`)">
+      <li v-for="product in this.listVelo" :key="product.key">
         <font-awesome-icon
           class="icon-heart"
           @click="addToWishList(product)"
           icon="heart"
         />
         <img
+            @click="this.$router.push(`/articleview/${product.key}`)"
           :id="product.photo"
           :src="i"
           :alt="product.photo"
           :onerror="getImage(product.photo)"
         />
-        <h4>{{ product.name }}</h4>
+        <h4
+            @click="this.$router.push(`/articleview/${product.key}`)">{{ product.name }}</h4>
 
         <div class="card-top">
           <span> {{ product.prix }} €</span>

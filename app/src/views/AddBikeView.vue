@@ -80,11 +80,11 @@ export default {
       const storage = getStorage();
       const spaceRef = refStore(storage, "Velos/" + id);
 
-      const metadata = {
+      /*const metadata = {
         contentType: 'image/png',
-      };
+      };*/
 
-      uploadBytes(spaceRef, this.article.image, metadata).then((snapshot) => {
+      uploadBytes(spaceRef, this.article.image).then((snapshot) => {
         console.log('Uploaded a blob or file!');
       });
 

@@ -10,9 +10,9 @@
           <div class="left">
             <img :src="product.image" :alt="product.name" />
             <img src="../assets/bike_one.png" :alt="product.name" />n
-
             <div class="body">
               <span> {{ product.name }} </span>
+              <span> {{ product.prix }} </span>
             </div>
           </div>
           <font-awesome-icon
@@ -24,8 +24,8 @@
       </ul>
       <div class="cart-container">
         <h3>Total</h3>
-        <p>Nombre d'items : 4</p>
-        <p>Somme : 200 €</p>
+        <p>Nombre d'items : {{getProduit.length}}</p>
+        <p>Somme : {{somme()}} €</p>
         <button>Payer</button>
       </div>
     </div>
@@ -45,6 +45,13 @@ export default {
     };
   },
   methods: {
+    somme(){
+      let somme = 0
+      for (let produitElement of this.getProduit) {
+        somme = somme + parseInt(produitElement.prix)
+      }
+      return somme
+    },
     deleteItemOfCart(element) {
       const db = getDatabase();
       let index = this.getProduit.findIndex((x) => x.key === element.key);

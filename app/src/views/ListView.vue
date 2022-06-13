@@ -18,7 +18,7 @@
       </select>
     </div>
     <ul>
-      <li v-for="product in this.listVelo" :key="product.key">
+      <li v-for="product in this.listVelo" :key="product.key" @click="this.$router.push(`/articleview/${product.key}`)">
         <font-awesome-icon
           class="icon-heart"
           @click="addToWishList(product)"

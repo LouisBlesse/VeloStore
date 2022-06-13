@@ -9,23 +9,14 @@
     </div>
     <div class="main">
         <div class="picture">
-            <img src="https://static1.altermove.com/32185-large_default/velo-electrique-de-ville-hollandais-e-u4-solid-7v.jpg" alt="velo" />
+            <img :id=this.article.photo arc="i" :alt="this.article.photo" :onerror="getImage(article.photo)" />
         </div>
         <div class="infos">
-            <h1>Le vélo</h1>
+            <h1>{{ this.article.name }}</h1>
             <!-- <h1>{{ store.state.products[store.state.products.findIndex((i) => i.id == $route.params.id)].name }}</h1> -->
-            <p>Lorem ipsum dolor sit amet. Ut assumenda sunt vel totam dolor est repellendus ducimus vel tempore numquam sed quam aliquam id enim optio. Rem Quis quam 
-                est voluptatem ipsum qui voluptatem maiores in alias officiis. Aut commodi similique et blanditiis voluptas ut perspiciatis consectetur ut deleniti tenetur 
-                est voluptatem nisi. At rerum minus ut tempore itaque ut aperiam eaque qui veritatis asperiores et adipisci temporibus!
-
-            Qui corporis rerum est illum deserunt ut perspiciatis maiores. Id molestiae ipsum cum quis aspernatur ad alias rerum ut nesciunt nulla et sint tenetur rem 
-            quisquam ipsa id minus enim. Mollitia aspernatur qui consequuntur tenetur qui deleniti voluptatem vel culpa odit.
-
-            Aut blanditiis temporibus in ducimus deserunt ea voluptate provident ut nemo similique qui rerum alias id facere sint. Ut culpa accusantium aut voluptatem 
-            ducimus eos odio sequi animi atque sed voluptatum itaque in harum laboriosam. Et laudantium exercitationem ex enim deserunt ex iste dicta aut exercitationem 
-            aliquid est aliquid nulla aut dolore consequatur ut sequi dolores. Et dolore tenetur est officia magni quidem quibusdam!</p>
+            <p>{{ this.article.description }}</p>
             <div class="side-infos">
-                <p>Prix : 50€</p>
+                <p>Prix : {{ this.article.prix }}€</p>
                 <p>Vendeur : Jean Dupont</p>
                 <p>Stock : 5</p>
             </div>
@@ -43,13 +34,51 @@
 </template>
 
 <script>
+import { getDatabase, ref, child, get } from "firebase/database";
+import { getStorage, ref as refStore, getDownloadURL } from "firebase/storage";
+
 export default {
   name: "ArticleView",
   data() {
     return {
+        article: []
     };
   },
   methods: {
+    getData() {
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `produits/${this.$route.params.id}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            this.article = snapshot.val();
+        } else {
+            console.log("No data available");
+        }
+        }).catch((error) => {
+            console.error(error);
+        });
+    },
+
+    getImage(key){
+      const storage = getStorage();
+      console.log("key : " + key);
+      getDownloadURL(refStore(storage,'gs://velostore-124cf.appspot.com/'+ key))
+          .then((url) => {
+            // `url` is the download URL for 'images/stars.jpg'
+
+            // This can be downloaded directly:
+           const img = document.getElementById(key);
+            img.setAttribute('src', url);
+            console.log("url:" +url);
+          })
+          .catch((error) => {
+            // Handle any error
+            console.log("okok")
+          });
+    },
+  },
+  mounted() {
+    this.getData();
+    this.getImage(this.$route.params.id);
   },
 };
 </script>
@@ -78,7 +107,6 @@ export default {
 
     .main {
         display: flex;
-        justify-content: space-between;
         margin: 0 4em 4em;
         font-family: "Open sans", Helvetica, sans-serif;
         min-height: 100%;
@@ -104,10 +132,15 @@ export default {
         }
 
         .infos {
-            width: auto;
+            width: 60%;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+
+            @media screen and (max-width:992px) {
+                min-width: 100%;
+                max-width: 100%;
+            }
 
             * {
                 padding: 20px;

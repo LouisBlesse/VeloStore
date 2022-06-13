@@ -33,16 +33,7 @@
 </template>
 
 <script>
-import {
-  getDatabase,
-  ref,
-  child,
-  get,
-  remove,
-  forceLongPolling,
-  // set,
-  // forceLongPolling,
-} from "firebase/database";
+import { getDatabase, ref, child, get, remove } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 export default {
@@ -56,6 +47,8 @@ export default {
   methods: {
     deleteItemOfCart(element) {
       const db = getDatabase();
+      let index = this.getProduit.findIndex((x) => x.key === element.key);
+      this.getProduit.splice(index, 1);
       remove(ref(db, `panier/` + element.key));
     },
     getAllProduct() {
@@ -69,7 +62,6 @@ export default {
             this.arrayCart = snapshot.val();
 
             snapshot.forEach(function (childSnapshot) {
-              // console.log(childSnapshot.key);
               var item = childSnapshot.val();
               item.key = childSnapshot.key;
               returnArr.push(item);

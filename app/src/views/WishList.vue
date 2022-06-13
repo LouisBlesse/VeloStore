@@ -44,6 +44,8 @@ export default {
     deleteItemOfWishList(index) {
       const db = getDatabase();
 
+      let element = this.wishlist.findIndex((x) => x.key === index.key);
+      this.wishlist.splice(element, 1);
       remove(ref(db, `wishlist/` + index.key));
     },
     getAllWishList() {

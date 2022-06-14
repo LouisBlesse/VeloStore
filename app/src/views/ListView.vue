@@ -25,14 +25,15 @@
           icon="heart"
         />
         <img
-            @click="this.$router.push(`/articleview/${product.key}`)"
+          @click="this.$router.push(`/articleview/${product.key}`)"
           :id="product.photo"
           :src="i"
           :alt="product.photo"
           :onerror="getImage(product.photo)"
         />
-        <h4
-            @click="this.$router.push(`/articleview/${product.key}`)">{{ product.name }}</h4>
+        <h4 @click="this.$router.push(`/articleview/${product.key}`)">
+          {{ product.name }}
+        </h4>
 
         <div class="card-top">
           <span> {{ product.prix }} €</span>

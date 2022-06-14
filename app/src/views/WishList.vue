@@ -49,8 +49,8 @@ export default {
       const db = getDatabase();
 
       let element = this.wishlist.findIndex((x) => x.key === index.key);
-      this.wishlist.splice(element, 1);
       remove(ref(db, `wishlist/` + index.key));
+      this.wishlist.splice(element, 1);
     },
     getImage(key) {
       const storage = getStorage();
@@ -141,7 +141,7 @@ export default {
     padding: 3rem;
 
     li {
-      min-width: 50%;
+      min-width: 80%;
       height: 141px;
       display: flex;
       align-items: center;
@@ -208,8 +208,8 @@ export default {
       }
 
       img {
-        width: 218px;
-        height: 112px;
+        width: 168px;
+        height: 95px;
         border-radius: 5px;
         margin: 0 0.7rem;
       }

@@ -76,23 +76,44 @@ export default {
       });
     },
 
-    register() {
+    async register() {
       const auth = getAuth(app);
 
       createUserWithEmailAndPassword(
         auth,
         this.newUser.email,
         this.newUser.password
-      ).then((data) => {
-        console.log("succefully sign in");
-        const user = data.user.uid;
-        this.writeUserData(
-          user,
-          this.newUser.username,
-          this.newUser.email,
-          this.newUser.password
-        );
-      });
+      )
+        .then((data) => {
+          console.log("succefully sign in");
+          const user = data.user.uid;
+          this.writeUserData(
+            user,
+            this.newUser.username,
+            this.newUser.email,
+            this.newUser.password
+          );
+
+          this.$router.push("/loginview");
+        })
+        .catch((error) => {
+          switch (error.code) {
+            case "auth/email-already-in-use":
+              alert("Email already in use");
+              break;
+            case "auth/invalid-email":
+              alert("Invalid email");
+              break;
+            case "auth/operation-not-allowed":
+              alert("Operation not allowed");
+              break;
+            case "auth/weak-password":
+              alert("Weak password");
+              break;
+            default:
+              alert("Something went wrong");
+          }
+        });
     },
   },
 };

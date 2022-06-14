@@ -63,8 +63,8 @@ export default {
     deleteItemOfCart(element) {
       const db = getDatabase();
       let index = this.getProduit.findIndex((x) => x.key === element.key);
-      this.getProduit.splice(index, 1);
       remove(ref(db, `panier/` + element.key));
+      this.getProduit.splice(index, 1);
     },
     getImage(key) {
       const storage = getStorage();
@@ -161,7 +161,7 @@ export default {
       padding: 3rem;
 
       li {
-        min-width: 200px;
+        min-width: 80%;
         height: 111px;
         display: flex;
         align-items: center;
@@ -183,6 +183,7 @@ export default {
 
         .left {
           display: flex;
+          width: 70%;
 
           .body {
             margin-left: 1rem;
@@ -202,6 +203,10 @@ export default {
               color: #000000;
             }
           }
+        }
+
+        .closex-mark {
+          text-align: center;
         }
 
         #price {

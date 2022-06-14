@@ -23,16 +23,6 @@
             required
           />
         </div>
-        <div class="item">
-          <label><b>Pseudo</b></label>
-          <input
-            type="text"
-            v-model="user.username"
-            placeholder="Entrer le pseudo"
-            name="username"
-            required
-          />
-        </div>
 
         <div>
           <p id="errorLogInMessage"></p>

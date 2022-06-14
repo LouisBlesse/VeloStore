@@ -8,11 +8,18 @@
       <ul>
         <li v-for="(product, index) in getProduit" :key="index">
           <div class="left">
-            <img :src="product.image" :alt="product.name" />
-            <img src="../assets/bike_one.png" :alt="product.name" />n
+            <!-- <img :src="product.image" :alt="product.name" /> -->
+            <!-- <img src="../assets/bike_one.png" :alt="product.name" />n -->
+            <!--  @click="this.$router.push(`/articleview/${product.key}`)" -->
+            <img
+              :id="product.photo"
+              :src="i"
+              :alt="product.photo"
+              :onerror="getImage(product.photo)"
+            />
             <div class="body">
               <span> {{ product.name }} </span>
-              <span> {{ product.prix }} </span>
+              <span> {{ product.prix }} €</span>
             </div>
           </div>
           <font-awesome-icon
@@ -24,8 +31,8 @@
       </ul>
       <div class="cart-container">
         <h3>Total</h3>
-        <p>Nombre d'items : {{getProduit.length}}</p>
-        <p>Somme : {{somme()}} €</p>
+        <p>Nombre d'items : {{ getProduit.length }}</p>
+        <p>Somme : {{ somme() }} €</p>
         <button>Payer</button>
       </div>
     </div>
@@ -35,6 +42,7 @@
 <script>
 import { getDatabase, ref, child, get, remove } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { getStorage, ref as refStore, getDownloadURL } from "firebase/storage";
 
 export default {
   name: "CartView",
@@ -45,18 +53,35 @@ export default {
     };
   },
   methods: {
-    somme(){
-      let somme = 0
+    somme() {
+      let somme = 0;
       for (let produitElement of this.getProduit) {
-        somme = somme + parseInt(produitElement.prix)
+        somme = somme + parseInt(produitElement.prix);
       }
-      return somme
+      return somme;
     },
     deleteItemOfCart(element) {
       const db = getDatabase();
       let index = this.getProduit.findIndex((x) => x.key === element.key);
       this.getProduit.splice(index, 1);
       remove(ref(db, `panier/` + element.key));
+    },
+    getImage(key) {
+      const storage = getStorage();
+      console.log("key : " + key);
+      getDownloadURL(
+        refStore(storage, "gs://velostore-124cf.appspot.com/" + key)
+      )
+        .then((url) => {
+          // `url` is the download URL for 'images/stars.jpg'
+          // This can be downloaded directly:
+          const img = document.getElementById(key);
+          img.setAttribute("src", url);
+          console.log("url:" + url);
+        })
+        .catch((error) => {
+          // Handle any error
+        });
     },
     getAllProduct() {
       const dbRef = ref(getDatabase());
@@ -136,7 +161,7 @@ export default {
       padding: 3rem;
 
       li {
-        width: 448px;
+        min-width: 200px;
         height: 111px;
         display: flex;
         align-items: center;
@@ -188,7 +213,7 @@ export default {
           color: #252525;
         }
         img {
-          width: 218px;
+          width: 168px;
           height: 95px;
           border-radius: 5px;
           margin: 0 0.7rem;

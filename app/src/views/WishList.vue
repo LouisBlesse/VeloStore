@@ -7,11 +7,14 @@
     <ul>
       <li v-for="(product, index) in wishlist" :key="index">
         <div class="left">
-          <img :src="product.photo" :alt="product.name" />
-
+          <img
+            :id="product.photo"
+            :src="i"
+            :alt="product.photo"
+            :onerror="getImage(product.photo)"
+          />
           <div class="body">
             <span> {{ product.name }} </span>
-            <font-awesome-icon class="cart-icon" icon="cart-plus" @click="buy(product)"/>
 
             <p>{{ product.description }}</p>
           </div>
@@ -32,6 +35,7 @@
 <script>
 import { getDatabase, ref, child, get, remove, t } from "firebase/database";
 import { getAuth } from "firebase/auth";
+import { getStorage, ref as refStore, getDownloadURL } from "firebase/storage";
 
 export default {
   name: "WishList",
@@ -47,6 +51,23 @@ export default {
       let element = this.wishlist.findIndex((x) => x.key === index.key);
       this.wishlist.splice(element, 1);
       remove(ref(db, `wishlist/` + index.key));
+    },
+    getImage(key) {
+      const storage = getStorage();
+      console.log("key : " + key);
+      getDownloadURL(
+        refStore(storage, "gs://velostore-124cf.appspot.com/" + key)
+      )
+        .then((url) => {
+          // `url` is the download URL for 'images/stars.jpg'
+          // This can be downloaded directly:
+          const img = document.getElementById(key);
+          img.setAttribute("src", url);
+          console.log("url:" + url);
+        })
+        .catch((error) => {
+          // Handle any error
+        });
     },
     getAllWishList() {
       const dbRef = ref(getDatabase());
@@ -120,7 +141,7 @@ export default {
     padding: 3rem;
 
     li {
-      width: 90%;
+      min-width: 50%;
       height: 141px;
       display: flex;
       align-items: center;

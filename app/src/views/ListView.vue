@@ -1,8 +1,8 @@
 <template>
   <div class="listview">
-    <h2>Nos Vélos</h2>
+    <h2>Les annonces</h2>
     <button @click="this.$router.push('/addbikeview')">
-      Ajouter un produit
+      Nouvelle annonce
     </button>
     <div class="filter">
       <input type="text" v-model="name" placeholder="saisir le nom" />
@@ -19,11 +19,6 @@
     </div>
     <ul>
       <li v-for="product in this.listVelo" :key="product.key">
-        <font-awesome-icon
-          class="icon-heart"
-          @click="addToWishList(product)"
-          icon="heart"
-        />
         <img
           @click="this.$router.push(`/articleview/${product.key}`)"
           :id="product.photo"
@@ -31,17 +26,25 @@
           :alt="product.photo"
           :onerror="getImage(product.photo)"
         />
-        <h4 @click="this.$router.push(`/articleview/${product.key}`)">
-          {{ product.name }}
-        </h4>
-
-        <div class="card-top">
-          <span> {{ product.prix }} €</span>
-          <font-awesome-icon
-            :class="test ? 'icon-cart-plus' : ''"
-            @click="addToCart(product)"
-            icon="cart-plus"
-          />
+        <div class="card-info">
+          <div class="card-top">
+            <font-awesome-icon
+              class="icon-heart icon"
+              @click="addToWishList(product)"
+              icon="heart"
+            />
+            <font-awesome-icon
+              class="icon-cart-plus icon"
+              @click="addToCart(product)"
+              icon="cart-plus"
+            />
+          </div>
+          <div class="card-middle">
+            <span>Seller name</span>
+            <span> {{ product.prix }} €</span>
+          </div>
+          <h4
+              @click="this.$router.push(`/articleview/${product.key}`)">{{ product.name }}</h4>
         </div>
       </li>
     </ul>
@@ -187,9 +190,12 @@ export default {
   align-items: center;
 
   h2 {
-    color: #fff;
+    color: black;
     text-align: center;
     margin: 3rem 0;
+    font-size: 80px;
+    font-family: 'Montserrat';
+    font-weight: bold;
   }
 
   .filter {
@@ -238,20 +244,41 @@ export default {
       background: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       margin: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      overflow: hidden;
+
+      .card-info {
+        padding: 0 15px;
+
+        h4 {
+          font-size: 20px;
+          padding-top: 0.5rem !important;
+          padding: 0 4.8px;
+          font-family: 'Roboto';
+          font-weight: 1000;
+        }
+      }
 
       .card-top {
         display: flex;
         align-items: center;
-        h4 {
-          font-size: 20px;
-          padding-left: 0.6rem;
-          padding-top: 0.5rem !important;
-          padding: 0 1.3rem;
+        font-size: 20px;
+        color: #0F1828;
+ 
+        .icon {
+          margin: 5px;
         }
-        .icon-cart-plus {
-          padding-left: 0.6rem;
+      }
+
+      .card-middle {
+        margin-right: 12px;
+        display: flex;
+        justify-content: space-between;
+        span {
+          color: #AAA;
           font-size: 20px;
-          color: white;
+          font-weight: bold;
         }
       }
 
@@ -268,13 +295,13 @@ export default {
         padding: 1rem 1.3rem;
       }
 
-      .icon-heart {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 1rem;
-        color: black;
-      }
+      // .icon-heart {
+      //   position: absolute;
+      //   top: 0;
+      //   right: 0;
+      //   padding: 1rem;
+      //   color: black;
+      // }
 
       span {
         padding-left: 0.3rem;
@@ -282,10 +309,12 @@ export default {
       }
 
       img {
-        width: 319px;
+        width: 100%;
         height: 166px;
-        border-radius: 1px;
-        background-size: cover;
+        border-radius: 10px 10px 0 0;
+        background-size: no-repeat;
+        object-fit: cover;
+        border-bottom: 1px solid #ddd;
         // margin: 0.3rem auto;
       }
 
@@ -298,5 +327,32 @@ export default {
       }
     }
   }
+
+  button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-bottom: 2em;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        background-color: #555555;
+        color: white;
+        border: 2px solid #555555;
+        border-radius: 5px;
+
+        @media screen and (max-width:1280px) {
+            margin: 4px 0;
+        }
+    }
+
+    button:hover {
+        background-color: white;
+        color: #444;
+    }
 }
 </style>

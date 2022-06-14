@@ -37,9 +37,10 @@
 </template>
 
 <script>
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, child, set, get } from "firebase/database";
 import { uuid } from "vue-uuid";
 import { getStorage, ref as refStore, uploadBytes } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 
 export default {
   name: "AddBikeView",
@@ -75,11 +76,27 @@ export default {
     },
 
     addToDatabase() {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      console.log(user.uid)
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, `users/${user.uid}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          this.pushToDatabase(snapshot.val().username)
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      }); 
+    },
+
+    pushToDatabase(sellerName) {
       const id = uuid.v1();
       ////////////Image
       const storage = getStorage();
       const spaceRef = refStore(storage, "Velos/" + id);
-
       /*const metadata = {
         contentType: 'image/png',
       };*/
@@ -98,9 +115,10 @@ export default {
         name: this.article.name,
         prix: this.article.price,
         stock: this.article.stock,
+        seller: sellerName,
       });
       this.$router.push("/listview");
-    },
+    }
   },
 };
 </script>

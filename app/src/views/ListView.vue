@@ -40,7 +40,7 @@
             />
           </div>
           <div class="card-middle">
-            <span>Seller name</span>
+            <span>{{ product.seller }}</span>
             <span> {{ product.prix }} €</span>
           </div>
           <h4
@@ -173,9 +173,25 @@ export default {
           console.error(error);
         });
     },
+    testauth() {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      console.log(user.uid)
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, `users/${user.uid}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
   },
   mounted() {
     this.getData();
+    this.testauth();
   },
 };
 </script>

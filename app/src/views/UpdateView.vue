@@ -38,7 +38,7 @@
           <p id="errorLogInMessage"></p>
         </div>
 
-        <input type="submit" id="submit" value="Connexion" />
+        <input type="submit" id="submit" value="Sauvegarder" />
       </form>
     </section>
   </div>
@@ -97,7 +97,7 @@ section {
     padding: 30px;
     border: 1px solid #f1f1f1;
     width: 641px;
-    height: 457px;
+    height: 480px;
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -108,6 +108,7 @@ section {
     h1 {
       text-align: center;
       margin: 1rem;
+      font-size: 40px;
     }
 
     .item {

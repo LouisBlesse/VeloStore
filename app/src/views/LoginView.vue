@@ -101,6 +101,7 @@ section {
     h1 {
       text-align: center;
       margin: 1rem;
+      font-size: 40px;
     }
 
     .item {

@@ -26,7 +26,7 @@
         </div>
         <div class="item">
           <label for="stock"
-            >Nombre d'exemplaire de l'article à vendre</label
+            >Nombre d'exemplaire à vendre</label
           >
           <input type="number" v-model="article.stock" />
         </div>
@@ -109,7 +109,7 @@ export default {
 section {
   // background: linear-gradient(#071e38, #040614);
   background-color: #fff;
-  height: calc(100vh - 6vh);
+  height: calc(100vh - 7vh);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,7 +119,7 @@ section {
     padding: 30px;
     border: 1px solid #f1f1f1;
     width: 641px;
-    height: 710px;
+    height: 730px;
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -130,6 +130,7 @@ section {
     h1 {
       text-align: center;
       margin: 1rem;
+      font-size: 40px;
     }
 
     .item {
